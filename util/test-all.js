@@ -1,7 +1,7 @@
-
+const path=require('path');
 module.exports = async () => {
 
-    require('dotenv').config();
+    require('dotenv').config({path: path.resolve(process.cwd(),'.env')});
 
     if (!process.env.TEST_SERVER_PORT || !process.env.TEST_SERVER_PORT.length)
         throw new Error(`No testing port specified! Please run 'tidil init'`);

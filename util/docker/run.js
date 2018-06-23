@@ -1,8 +1,8 @@
 const chalk=require('chalk');
-
+const path=require('path');
 module.exports = async ({containerName}) => {
 
-    require('dotenv').config({path: process.cwd()});
+    require('dotenv').config({path: path.resolve(process.cwd(),'.env')});
 
     await require('exec-sequence').run({
         'Check Dockerfile exists':{
@@ -17,7 +17,7 @@ module.exports = async ({containerName}) => {
                     if (process.env.PORT && process.env.PORT.length) {
                         resolve("All environment variables required are set")
                     } else {
-                        reject("Environment variables not set! Please run 'npm init'");
+                        reject("Environment variables not set! Please run 'tidil env'");
                     }
                 }catch (err){
                     reject("Unknown error occurred");

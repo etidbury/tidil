@@ -1,9 +1,9 @@
 const {run, exec} = require('exec-sequence');
-
+const path=require('path');
 
 module.exports = async () => {
 
-    require('dotenv').config();
+    require('dotenv').config({path: path.resolve(process.cwd(),'.env')});
 
     if (!process.env.GIT_WORKING_BRANCH || !process.env.GIT_WORKING_BRANCH.length) {
         throw new Error("Working branch not set! Please run 'npm run init'");

@@ -1,6 +1,6 @@
 const chalk=require('chalk');
 const axios=require('axios');
-
+const path=require('path');
 module.exports = async ({port}) => {
 
     const ENV_PORT_NAME="PORT";
@@ -11,7 +11,7 @@ module.exports = async ({port}) => {
             command:"exit 0",
             promise:()=>new Promise((resolve,reject)=>{
 
-                require('dotenv').config({path: process.cwd()});
+                require('dotenv').config({path: path.resolve(process.cwd(),'.env')});
 
                 if (port&&port.length){
                     _port=port;
