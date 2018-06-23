@@ -25,17 +25,18 @@ module.exports = async ({port}) => {
 
             })
         },
-        "Attempt connect to port (wait max 20s)":{
+        "Attempt connect to server (wait max 20s)":{
             promise:()=>new Promise((resolve,reject)=>{
 
                 const _startTimestamp=Date.now();
                 let s = async () => {
                     try {
 
-                        const r = await axios.get(`http://localhost:${_port}`);
+                        const url=`http://localhost:${_port}`;
+                        const r = await axios.get(url);
 
                         if (r){
-                            resolve();
+                            resolve(`Connected to ${url} successfully`);
                         }
 
                     } catch (err) {
