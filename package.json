@@ -7,5 +7,14 @@
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "author": "Edd Tidbury",
-  "license": "MIT"
+  "license": "MIT",
+  "dependencies": {
+    "axios": "^0.18.0",
+    "chalk": "^2.4.1",
+    "commander": "^2.15.1",
+    "compare-versions": "^3.3.0",
+    "exec-sequence": "^0.5.0",
+    "fs-extra": "^6.0.1",
+    "latest-version": "^4.0.0"
+  }
 }
