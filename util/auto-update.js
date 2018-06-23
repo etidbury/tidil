@@ -84,7 +84,7 @@ module.exports = async ({BASE_TIDIL_DIR, TIDIL_CMD_NAME}) => {
             await new Promise((resolve)=>{
                 setTimeout(()=>{
                     resolve();
-                },2000);
+                },1000);
             });
             return true;
 
