@@ -4,7 +4,7 @@ module.exports = async () => {
     require('dotenv').config();
 
     if (!process.env.TEST_SERVER_PORT || !process.env.TEST_SERVER_PORT.length)
-        throw new Error(`No testing port specified! Please run 'npm run init'`);
+        throw new Error(`No testing port specified! Please run 'tidil init'`);
 
     require('exec-sequence').run({
         "Test client-side": {
