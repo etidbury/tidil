@@ -3,7 +3,7 @@ const axios=require('axios');
 const path=require('path');
 module.exports = async ({port}) => {
 
-    const ENV_PORT_NAME="PORT";
+    const ENV_PORT_NAME="DEV_SERVER_PORT";
     let _port;
 
     await require('exec-sequence').run({
