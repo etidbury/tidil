@@ -33,7 +33,16 @@ module.exports = async ({port}) => {
                     try {
 
                         const url=`http://localhost:${_port}`;
-                        const r = await axios.get(url);
+
+                        const axiosPingInstance = axios.create({
+                            validateStatus: function (status)
+                            {
+                                return status >= 200 && status < 500; // default
+                            }
+                        });
+
+
+                        const r = await axiosPingInstance.get(url);
 
                         if (r){
                             resolve(`Connected to ${url} successfully`);
