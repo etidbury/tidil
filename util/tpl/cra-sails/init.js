@@ -7,7 +7,7 @@ module.exports = async ({BASE_TIDIL_DIR}) => {
     const axios = require('axios');
 
     const config = {
-        TPL_REPO_URL: "http://github.com/etidbury/cra-sails-boilerplate.git"
+        TPL_REPO_URL: "http://github.com/etidbury/tpl-cra-sails.git"
     };
 
     await require('exec-sequence').run({
