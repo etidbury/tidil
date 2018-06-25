@@ -52,7 +52,7 @@ const TIDIL_CMD_NAME = "tidil";
 
 
                     await utilCommand({BASE_TIDIL_DIR});
-
+                    process.exit(0);
 
                 } catch (err) {
                     console.error("Command Error\n", err);
@@ -101,7 +101,7 @@ const TIDIL_CMD_NAME = "tidil";
 
 
                     await dockerCommand({containerName});
-
+                    process.exit(0);
 
                 } catch (err) {
                     console.error("Command Error\n", err);
@@ -142,6 +142,7 @@ const TIDIL_CMD_NAME = "tidil";
 
                     await miscCommand({port:options.port});
 
+                    process.exit(0);
 
                 } catch (err) {
                     console.error("Command Error\n", err);
@@ -179,7 +180,7 @@ const TIDIL_CMD_NAME = "tidil";
 
 
                     await miscCommand({port:options.port});
-
+                    process.exit(0);
 
                 } catch (err) {
                     console.error("Command Error\n", err);
@@ -216,7 +217,7 @@ const TIDIL_CMD_NAME = "tidil";
 
 
                     await miscCommand({port:options.port});
-
+                    process.exit(0);
 
                 } catch (err) {
                     console.error("Command Error\n", err);
@@ -254,7 +255,7 @@ const TIDIL_CMD_NAME = "tidil";
 
 
                     await miscCommand({BASE_TIDIL_DIR});
-
+                    process.exit(0);
 
                 } catch (err) {
                     console.error("Command Error\n", err);
@@ -294,7 +295,7 @@ const TIDIL_CMD_NAME = "tidil";
 
 
                     await miscCommand({BASE_TIDIL_DIR});
-
+                    process.exit(0);
 
                 } catch (err) {
                     console.error("Command Error\n", err);
