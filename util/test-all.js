@@ -6,7 +6,7 @@ module.exports = async () => {
     if (!process.env.TEST_SERVER_PORT || !process.env.TEST_SERVER_PORT.length)
         throw new Error(`No testing port specified! Please run 'tidil init'`);
 
-    require('exec-sequence').run({
+    await require('exec-sequence').run({
         "Test client-side": {
             //command: "exit 0",
             command: "npm test",

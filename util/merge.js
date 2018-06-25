@@ -22,7 +22,7 @@ module.exports = async () => {
     let _tempMergeBranch;
 
 
-    run({
+    await run({
         "Ensure all git changes have been committed": {
             command: "git diff --exit-code",
             options: {cwd: "./"},

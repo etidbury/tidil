@@ -8,7 +8,7 @@ module.exports = async ({portEnv}) => {
     if (!process.env[portEnv] || !process.env[portEnv].length)
         throw new Error(`Failed to find environment variable '${portEnv}' for port! Please run 'tidil env'`);
 
-    require('exec-sequence').run({
+    await require('exec-sequence').run({
         "Open client in browser": {
             //command: "exit 0",
             command: `open http://localhost:${process.env[portEnv]} && exit 0`
