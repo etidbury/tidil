@@ -13,3 +13,4 @@ add rm-pkg-locks/rm-locks-pkg - removes client/server lock files and node_module
 
 add command for grabbing file from github repo 
 e.g. curl https://codeload.github.com/zeit/next.js/tar.gz/canary | tar -xz --strip=2 next.js-canary/examples/with-jest
+curl -L https://github.com/etidbury/tpl-next-sails | tar zx /blob/master/README.md
