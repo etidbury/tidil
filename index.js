@@ -310,7 +310,7 @@ const TIDIL_CMD_NAME = "tidil";
         program
             .command(`rm-locks`)
             .option('--cwd <directory>', 'Set base directory')
-            .description('Open client in browser')
+            .description('Remove locks')
             //.option("-s, --setup_mode [mode]", "Which setup mode to use")
             .action(async (options) => {
 
@@ -342,6 +342,49 @@ const TIDIL_CMD_NAME = "tidil";
                 }
 
             });
+
+
+
+
+        program
+            .command(`rm-pkg-locks`)
+
+            .option('--cwd <directory>', 'Set base directory')
+            .description('Remove packages and locks')
+            //.option("-s, --setup_mode [mode]", "Which setup mode to use")
+            .action(async (options) => {
+
+                try {
+
+
+                    _handleCWD(options);
+
+
+
+                    let miscCommand;
+                    try {
+
+                        miscCommand = require(path.join(BASE_TIDIL_DIR, `util/rm-pkg-locks`));
+
+                    } catch (err) {
+                        throw err;
+                        //throw new Error("Failed to find utility method");
+                    }
+
+
+                    await miscCommand({BASE_TIDIL_DIR});
+                    process.exit(0);
+
+                } catch (err) {
+                    console.error("Command Error\n", err);
+                    //console.error("Error",err.message);//pretty print
+                    process.exit(1);
+                }
+
+            });
+
+
+
         program.parse(process.argv);
 
 
