@@ -271,6 +271,7 @@ const TIDIL_CMD_NAME = "tidil";
         program
             .command(`open`)
             .option('--cwd <directory>', 'Set base directory')
+            .option('--port-env <portEnv>', 'Set base directory')
             .description('Open client in browser')
             //.option("-s, --setup_mode [mode]", "Which setup mode to use")
             .action(async (options) => {
@@ -294,7 +295,7 @@ const TIDIL_CMD_NAME = "tidil";
                     }
 
 
-                    await miscCommand({BASE_TIDIL_DIR});
+                    await miscCommand({BASE_TIDIL_DIR,portEnv:options.portEnv});
                     process.exit(0);
 
                 } catch (err) {
