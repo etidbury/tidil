@@ -386,6 +386,44 @@ const TIDIL_CMD_NAME = "tidil";
 
 
 
+
+            //kill $(lsof -t -i:8080)
+            program
+            .command(`kill <port>`)
+            .description(`Kill process at port ('kill $(lsof -t -i:8080)')`)
+            //.option("-s, --setup_mode [mode]", "Which setup mode to use")
+            .action(async (port,options) => {
+
+                try {
+
+
+                    _handleCWD(options);
+
+
+
+                    let miscCommand;
+                    try {
+
+                        miscCommand = require(path.join(BASE_TIDIL_DIR, `util/kill`));
+
+                    } catch (err) {
+                        throw err;
+                        //throw new Error("Failed to find utility method");
+                    }
+
+
+                    await miscCommand({port,...options});
+                    process.exit(0);
+
+                } catch (err) {
+                    console.error("Command Error\n", err);
+                    //console.error("Error",err.message);//pretty print
+                    process.exit(1);
+                }
+
+            });
+
+
         program.parse(process.argv);
 
 
