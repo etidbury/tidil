@@ -116,6 +116,7 @@ const TIDIL_CMD_NAME = "tidil";
         program
             .command(`check-server`)
             .option('--port <port>', 'Set port name to check')
+            .option('--port-env <portEnv>', 'Set environment variable to obtain port')
             .option('--cwd <directory>', 'Set base directory')
             .description('run setup commands for all envs')
             //.option("-s, --setup_mode [mode]", "Which setup mode to use")
@@ -140,7 +141,7 @@ const TIDIL_CMD_NAME = "tidil";
                     }
 
 
-                    await miscCommand({port:options.port});
+                    await miscCommand(options);
 
                     process.exit(0);
 

@@ -1,42 +1,59 @@
-const chalk=require('chalk');
-const axios=require('axios');
-const path=require('path');
-module.exports = async ({port}) => {
+const chalk = require('chalk');
+const axios = require('axios');
+const path = require('path');
+module.exports = async ({ portEnv, port }) => {
 
-    const ENV_PORT_NAME="DEV_SERVER_PORT";
+    require('dotenv').config({ path: path.resolve(process.cwd(), '.env') });
+
+
     let _port;
 
     await require('exec-sequence').run({
-        'Check port is set':{
-            command:"exit 0",
-            promise:()=>new Promise((resolve,reject)=>{
+        'Check port is set': {
+            command: "exit 0",
+            promise: () => new Promise((resolve, reject) => {
 
-                require('dotenv').config({path: path.resolve(process.cwd(),'.env')});
+                require('dotenv').config({ path: path.resolve(process.cwd(), '.env') });
 
-                if (port&&port.length){
+
+                if (port) {
+
+                    if (!port.length||parseInt(port)<=0){
+                        throw new Error("Invalid port specified!")
+                    }
+
                     _port=port;
-                }else if (process.env[ENV_PORT_NAME]&&process.env[ENV_PORT_NAME].length){
-                    _port=process.env[ENV_PORT_NAME]
-                }else{
-                    return reject("Server Port is not set!");
+
+                    return resolve(`Checking server at port ${_port}`);
+
+                } else {
+                    portEnv = portEnv ? portEnv : "DEV_CLIENT_PORT";
+
+                    if (!process.env[portEnv] || !process.env[portEnv].length)
+                        throw new Error(`Failed to find environment variable '${portEnv}' for port! Please run 'tidil env'`);
+
+                    _port = process.env[portEnv];
+
+                    return resolve(`Checking server at port ${_port} (env: ${portEnv})`);
+
                 }
 
-                return resolve(`Ok port is set at: ${_port}`);
+
+
 
             })
         },
-        "Attempt connect to server (wait max 20s)":{
-            promise:()=>new Promise((resolve,reject)=>{
+        "Attempt connect to server (wait max 20s)": {
+            promise: () => new Promise((resolve, reject) => {
 
-                const _startTimestamp=Date.now();
+                const _startTimestamp = Date.now();
                 let s = async () => {
                     try {
 
-                        const url=`http://localhost:${_port}`;
+                        const url = `http://localhost:${_port}`;
 
                         const axiosPingInstance = axios.create({
-                            validateStatus: function (status)
-                            {
+                            validateStatus: function (status) {
                                 return status >= 200 && status < 500; // default
                             }
                         });
@@ -44,16 +61,16 @@ module.exports = async ({port}) => {
 
                         const r = await axiosPingInstance.get(url);
 
-                        if (r){
+                        if (r) {
                             resolve(`Connected to ${url} successfully`);
                         }
 
                     } catch (err) {
 
-                        if (Date.now()-_startTimestamp>20*1000){
+                        if (Date.now() - _startTimestamp > 20 * 1000) {
                             //if surpassed timeout, give up
                             reject(`The server is still not running (after 20 seconds)`);
-                        }else{
+                        } else {
                             setTimeout(() => {
                                 s();
                             }, 500);
@@ -62,11 +79,11 @@ module.exports = async ({port}) => {
 
 
                     }
-                };s();
+                }; s();
             })
         }
     })
-        .catch(({cmd, err}) => {
+        .catch(({ cmd, err }) => {
             process.exit(1);
         });
 };
