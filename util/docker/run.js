@@ -32,7 +32,7 @@ module.exports = async ({ containerName }) => {
             command: `docker build -t ${containerName} .`,
         },
         "Run Docker Container": {
-            command: `docker run -it ${containerName} -p ${process.env.PORT}:${process.env.DOCKER_PORT}`,
+            command: `docker run ${containerName} -p ${process.env.PORT}:${process.env.DOCKER_PORT}`,
         }
     })
         .catch(({ cmd, err }) => {
