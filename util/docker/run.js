@@ -26,7 +26,8 @@ module.exports = async ({ containerName }) => {
             })
         },
         'Clean Docker': {
-            promise: () => Promise.resolve(chalk.yellow("Not yet integrated!"))
+            command:`docker rmi -f ${containerName}`,
+            promise: () => Promise.resolve(chalk.yellow("Removed all images tagged 'cra-sails'"))
         },
         'Build Docker Container': {
             command: `docker build -t ${containerName} .`,
