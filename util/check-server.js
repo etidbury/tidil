@@ -82,8 +82,5 @@ module.exports = async ({ portEnv, port }) => {
                 }; s();
             })
         }
-    })
-        .catch(({ cmd, err }) => {
-            process.exit(1);
-        });
+    });
 };

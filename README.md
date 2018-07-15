@@ -1,3 +1,6 @@
+
+node /Users/edwardtidbury/Documents/Misc_Projects/tidil.git/index.js check-server --port-env TEST_SERVER_PORT
+
 todo
 
 ensure all commands resolve with process.exit

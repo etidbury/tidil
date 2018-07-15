@@ -9,7 +9,7 @@ const TIDIL_CMD_NAME = "tidil";
     try {
 
 
-        const r = await require(path.join(BASE_TIDIL_DIR, 'util/auto-update'))({BASE_TIDIL_DIR, TIDIL_CMD_NAME});
+        const r = await require(path.join(BASE_TIDIL_DIR, 'util/auto-update'))({ BASE_TIDIL_DIR, TIDIL_CMD_NAME });
 
         const _handleCWD = (options) => {
 
@@ -42,7 +42,7 @@ const TIDIL_CMD_NAME = "tidil";
                     let utilCommand;
                     try {
 
-                        await require(path.join(BASE_TIDIL_DIR, `util/tpl/init`))({templateID});
+                        await require(path.join(BASE_TIDIL_DIR, `util/tpl/init`))({ templateID });
 
                         utilCommand = require(path.join(BASE_TIDIL_DIR, `util/tpl/${templateID}/${cmd}`));
 
@@ -51,11 +51,11 @@ const TIDIL_CMD_NAME = "tidil";
                     }
 
 
-                    await utilCommand({BASE_TIDIL_DIR});
+                    await utilCommand({ BASE_TIDIL_DIR });
                     process.exit(0);
 
                 } catch (err) {
-                    console.error("Command Error\n", err);
+                    //console.error("Command Error\n", err);
                     //console.error("Error",err.message);//pretty print
                     process.exit(1);
                 }
@@ -90,7 +90,7 @@ const TIDIL_CMD_NAME = "tidil";
                     let dockerCommand;
                     try {
 
-                        await require(path.join(BASE_TIDIL_DIR, `util/docker/init`))({containerName});
+                        await require(path.join(BASE_TIDIL_DIR, `util/docker/init`))({ containerName });
 
                         dockerCommand = require(path.join(BASE_TIDIL_DIR, `util/docker/${cmd}`));
 
@@ -100,16 +100,31 @@ const TIDIL_CMD_NAME = "tidil";
                     }
 
 
-                    await dockerCommand({containerName});
+                    await dockerCommand({ containerName });
                     process.exit(0);
 
                 } catch (err) {
-                    console.error("Command Error\n", err);
+                    //console.error("Command Error\n", err);
                     //console.error("Error",err.message);//pretty print
                     process.exit(1);
                 }
 
             });
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 
@@ -137,16 +152,17 @@ const TIDIL_CMD_NAME = "tidil";
 
                     } catch (err) {
                         throw err;
-                       // throw new Error("Failed to find utility method");
+                        // throw new Error("Failed to find utility method");
                     }
 
+            
 
                     await miscCommand(options);
 
                     process.exit(0);
 
                 } catch (err) {
-                    console.error("Command Error\n", err);
+                    //console.error("Command Error\n", err);
                     //console.error("Error",err.message);//pretty print
                     process.exit(1);
                 }
@@ -180,11 +196,11 @@ const TIDIL_CMD_NAME = "tidil";
                     }
 
 
-                    await miscCommand({port:options.port});
+                    await miscCommand({ port: options.port });
                     process.exit(0);
 
                 } catch (err) {
-                    console.error("Command Error\n", err);
+                    //console.error("Command Error\n", err);
                     //console.error("Error",err.message);//pretty print
                     process.exit(1);
                 }
@@ -217,11 +233,11 @@ const TIDIL_CMD_NAME = "tidil";
                     }
 
 
-                    await miscCommand({port:options.port});
+                    await miscCommand({ port: options.port });
                     process.exit(0);
 
                 } catch (err) {
-                    console.error("Command Error\n", err);
+                    //console.error("Command Error\n", err);
                     //console.error("Error",err.message);//pretty print
                     process.exit(1);
                 }
@@ -255,11 +271,11 @@ const TIDIL_CMD_NAME = "tidil";
                     }
 
 
-                    await miscCommand({BASE_TIDIL_DIR});
+                    await miscCommand({ BASE_TIDIL_DIR });
                     process.exit(0);
 
                 } catch (err) {
-                    console.error("Command Error\n", err);
+                    //console.error("Command Error\n", err);
                     //console.error("Error",err.message);//pretty print
                     process.exit(1);
                 }
@@ -296,11 +312,11 @@ const TIDIL_CMD_NAME = "tidil";
                     }
 
 
-                    await miscCommand({BASE_TIDIL_DIR,portEnv:options.portEnv});
+                    await miscCommand({ BASE_TIDIL_DIR, portEnv: options.portEnv });
                     process.exit(0);
 
                 } catch (err) {
-                    console.error("Command Error\n", err);
+                    //console.error("Command Error\n", err);
                     //console.error("Error",err.message);//pretty print
                     process.exit(1);
                 }
@@ -333,11 +349,11 @@ const TIDIL_CMD_NAME = "tidil";
                     }
 
 
-                    await miscCommand({BASE_TIDIL_DIR});
+                    await miscCommand({ BASE_TIDIL_DIR });
                     process.exit(0);
 
                 } catch (err) {
-                    console.error("Command Error\n", err);
+                    //console.error("Command Error\n", err);
                     //console.error("Error",err.message);//pretty print
                     process.exit(1);
                 }
@@ -373,11 +389,11 @@ const TIDIL_CMD_NAME = "tidil";
                     }
 
 
-                    await miscCommand({BASE_TIDIL_DIR});
+                    await miscCommand({ BASE_TIDIL_DIR });
                     process.exit(0);
 
                 } catch (err) {
-                    console.error("Command Error\n", err);
+                    //console.error("Command Error\n", err);
                     //console.error("Error",err.message);//pretty print
                     process.exit(1);
                 }
@@ -387,12 +403,12 @@ const TIDIL_CMD_NAME = "tidil";
 
 
 
-            //kill $(lsof -t -i:8080)
-            program
+        //kill $(lsof -t -i:8080)
+        program
             .command(`kill <port>`)
             .description(`Kill process at port ('kill $(lsof -t -i:8080)')`)
             //.option("-s, --setup_mode [mode]", "Which setup mode to use")
-            .action(async (port,options) => {
+            .action(async (port, options) => {
 
                 try {
 
@@ -412,56 +428,91 @@ const TIDIL_CMD_NAME = "tidil";
                     }
 
 
-                    await miscCommand({port,...options});
+                    await miscCommand({ port, ...options });
                     process.exit(0);
 
                 } catch (err) {
-                    console.error("Command Error\n", err);
+                    //console.error("Command Error\n", err);
                     //console.error("Error",err.message);//pretty print
                     process.exit(1);
                 }
 
             });
 
-        
-             //kill $(lsof -t -i:8080)
-             program
-             .command(`print`)
-             .description(`Print a bunch of images centered`)
-             .option('--cwd <directory>', 'Set base directory')
-             //.option("-s, --setup_mode [mode]", "Which setup mode to use")
-             .action(async (options) => {
- 
-                 try {
- 
- 
-                     _handleCWD(options);
- 
- 
- 
-                     let miscCommand;
-                     try {
- 
-                         miscCommand = require(path.join(BASE_TIDIL_DIR, `util/print`));
- 
-                     } catch (err) {
-                         throw err;
-                         //throw new Error("Failed to find utility method");
-                     }
- 
- 
-                     await miscCommand({...options});
-                     process.exit(0);
- 
-                 } catch (err) {
-                     console.error("Command Error\n", err);
-                     //console.error("Error",err.message);//pretty print
-                     process.exit(1);
-                 }
- 
-             });
- 
 
+
+        program
+            .command(`print`)
+            .description(`Print a bunch of images centered`)
+            .option('--cwd <directory>', 'Set base directory')
+            //.option("-s, --setup_mode [mode]", "Which setup mode to use")
+            .action(async (options) => {
+
+                try {
+
+
+                    _handleCWD(options);
+
+
+
+                    let miscCommand;
+                    try {
+
+                        miscCommand = require(path.join(BASE_TIDIL_DIR, `util/print`));
+
+                    } catch (err) {
+                        throw err;
+                        //throw new Error("Failed to find utility method");
+                    }
+
+
+                    await miscCommand({ ...options });
+                    process.exit(0);
+
+                } catch (err) {
+                    //console.error("Command Error\n", err);
+                    //console.error("Error",err.message);//pretty print
+                    process.exit(1);
+                }
+
+            });
+
+
+        program
+            .command(`run <command>`)
+            .description(`Run misc. command`)
+            .option('--cwd <directory>', 'Set base directory')
+            //.option("-s, --setup_mode [mode]", "Which setup mode to use")
+            .action(async (command,options) => {
+
+                try {
+
+
+                    _handleCWD(options);
+
+
+
+                    let miscCommand;
+                    try {
+
+                        miscCommand = require(path.join(BASE_TIDIL_DIR, `util/${command}`));
+
+                    } catch (err) {
+                        throw err;
+                        //throw new Error(`Failed to find utility method ${command}`);
+                    }
+
+
+                    await miscCommand({ ...options });
+                    process.exit(0);
+
+                } catch (err) {
+                    //console.error("Command Error\n", err);
+                    //console.error("Error",err.message);//pretty print
+                    process.exit(1);
+                }
+
+            });
         program.parse(process.argv);
 
 
