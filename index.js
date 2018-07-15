@@ -132,6 +132,7 @@ const TIDIL_CMD_NAME = "tidil";
             .command(`check-server`)
             .option('--port <port>', 'Set port name to check')
             .option('--port-env <portEnv>', 'Set environment variable to obtain port')
+            .option('--wait <wait>', 'Set number of seconds to wait for connection')
             .option('--cwd <directory>', 'Set base directory')
             .description('run setup commands for all envs')
             //.option("-s, --setup_mode [mode]", "Which setup mode to use")
