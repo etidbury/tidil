@@ -8,8 +8,7 @@ const TIDIL_CMD_NAME = "tidil";
 (async () => {
     try {
 
-
-        const r = await require(path.join(BASE_TIDIL_DIR, 'util/auto-update'))({ BASE_TIDIL_DIR, TIDIL_CMD_NAME });
+        //await require(path.join(BASE_TIDIL_DIR, 'util/auto-update'))({ BASE_TIDIL_DIR, TIDIL_CMD_NAME });
 
         const _handleCWD = (options) => {
 
@@ -478,6 +477,49 @@ const TIDIL_CMD_NAME = "tidil";
 
             });
 
+
+
+            program
+            .command(`free-port`)
+            .description(`Find a free TCP port`)
+            //.option('--cwd <directory>', 'Set base directory')
+            //.option("-s, --setup_mode [mode]", "Which setup mode to use")
+            .action(async (options) => {
+
+                try {
+
+       
+
+                    _handleCWD(options);
+
+
+
+                    let miscCommand;
+                    try {
+           
+                        miscCommand = require(path.join(BASE_TIDIL_DIR, `util/free-port`));
+                    
+                        
+                    } catch (err) {
+                   
+
+                        throw err;
+                        //throw new Error("Failed to find utility method");
+                    }
+
+                  
+                    await miscCommand({ ...options });
+
+                    process.exit(0);
+
+                } catch (err) {
+                    console.error("Command Error\n", err);
+                    console.error("Error",err.message);//pretty print
+
+                    process.exit(1);
+                }
+
+            });
 
         program
             .command(`run <command>`)

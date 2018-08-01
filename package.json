@@ -1,6 +1,6 @@
 {
   "name": "tidil",
-  "version": "0.0.24",
+  "version": "0.0.25",
   "description": "",
   "main": "index.js",
   "scripts": {
@@ -14,11 +14,13 @@
   "dependencies": {
     "axios": "^0.18.0",
     "chalk": "^2.4.1",
+    "cli-clear": "^1.0.4",
     "commander": "^2.15.1",
     "compare-versions": "^3.3.0",
     "dotenv": "^6.0.0",
     "exec-sequence": "^0.5.5",
     "fs-extra": "^6.0.1",
+    "get-port": "^4.0.0",
     "latest-version": "^4.0.0"
   }
 }
