@@ -8,7 +8,10 @@ const TIDIL_CMD_NAME = "tidil";
 (async () => {
     try {
 
-        //await require(path.join(BASE_TIDIL_DIR, 'util/auto-update'))({ BASE_TIDIL_DIR, TIDIL_CMD_NAME });
+
+        //auto-update
+        //todo: enable only for certain commands and disable for CI
+        //await require(path.join(BASE_TIDIL_DIR, 'util/auto-update'))({ BASE_TIDIL_DIR, TIDIL_CMD_NAME })
 
         const _handleCWD = (options) => {
 

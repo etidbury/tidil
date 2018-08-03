@@ -1,4 +1,3 @@
-const getPort = require("get-port");
 const path = require("path");
 
 module.exports = async ({}) => {
@@ -14,7 +13,7 @@ module.exports = async ({}) => {
   })
 
   //todo: ensure this is the only output for this command
-  console.log(port);
+  console.log(port)
 
-  process.exit();
+  process.exit()
 };
