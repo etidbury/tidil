@@ -12,7 +12,8 @@ const TIDIL_CMD_NAME = "tidil";
         //auto-update
         //todo: enable only for certain commands and disable for CI
         //await require(path.join(BASE_TIDIL_DIR, 'util/auto-update'))({ BASE_TIDIL_DIR, TIDIL_CMD_NAME })
-
+        //note: currently only used in 'tpl' command
+        
         const _handleCWD = (options) => {
 
             if (options.cwd && options.cwd.length) {
@@ -40,6 +41,9 @@ const TIDIL_CMD_NAME = "tidil";
                     if (options.cwd && options.cwd.length) {
                         process.chdir(options.cwd);
                     }
+
+                    //auto-update
+                    await require(path.join(BASE_TIDIL_DIR, 'util/auto-update'))({ BASE_TIDIL_DIR, TIDIL_CMD_NAME })
 
                     let utilCommand;
                     try {
