@@ -30,14 +30,16 @@ module.exports = async ({BASE_TIDIL_DIR,repo,destination}) => {
             command: `git clone ${resolveRepoURL} ${destination}`
         },
         "Remove .git from project": {
-            command: `rm -rf .git`
+            command: `rm -rf .git`,
+            options: {cwd: path.resolve(process.cwd(),destination)},
         },
         "Install packages via Yarn": {
-            command: `yarn`
+            command: `yarn`,
+            options: {cwd: path.resolve(process.cwd(),destination)},
         },
         "Run Tests": {
             command: `yarn test`,
-            options: {cwd: process.cwd()},
+            options: {cwd: path.resolve(process.cwd(),destination)},
             error: "Failed to run tests!"
         }
     }).then(() => {
