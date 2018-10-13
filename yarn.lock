@@ -238,7 +238,7 @@ exec-file-sync@^2.0.0:
     object-assign "^4.0.1"
     spawn-sync "^1.0.11"
 
-exec-sequence@^0.5.5:
+exec-sequence@latest:
   version "0.5.5"
   resolved "https://registry.yarnpkg.com/exec-sequence/-/exec-sequence-0.5.5.tgz#bc73ba74f3aac4a4bcceb7d2d9fa8f7b261fef66"
   dependencies:
