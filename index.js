@@ -573,22 +573,22 @@ const TIDIL_CMD_NAME = "tidil";
             //.option("-s, --setup_mode [mode]", "Which setup mode to use")
             .action(async (repo,destination, options) => {
                 try {
-                    console.log('ffdfd1')
+                    
                     if (!repo || !repo.length) {
                         throw new Error(`Invalid Repository specified: '${repo}'`);
                     }
-                    console.log('ffdfd2')
+         
                     if (!destination || !destination.length) {
                         //throw new Error("Invalid destination specified");
                         destination='./'
                     }
-                    console.log('ffdfd3')
+         
 
                     if (options.cwd && options.cwd.length) {
                         process.chdir(options.cwd);
                     }
 
-                    console.log('ffdfd4')
+                    
                     //auto-update
                     await require(path.join(BASE_TIDIL_DIR, 'util/auto-update'))({ BASE_TIDIL_DIR, TIDIL_CMD_NAME })
 
