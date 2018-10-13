@@ -563,6 +563,56 @@ const TIDIL_CMD_NAME = "tidil";
                 }
 
             });
+
+
+        program
+            .version('' + pkg.version)
+            .command(`clone <repo> [destination]`)
+            .option('--cwd <directory>', 'Set base directory')
+            .description('run setup commands for all envs')
+            //.option("-s, --setup_mode [mode]", "Which setup mode to use")
+            .action(async (repo,destination, options) => {
+                try {
+                    console.log('ffdfd1')
+                    if (!repo || !repo.length) {
+                        throw new Error(`Invalid Repository specified: '${repo}'`);
+                    }
+                    console.log('ffdfd2')
+                    if (!destination || !destination.length) {
+                        //throw new Error("Invalid destination specified");
+                        destination='./'
+                    }
+                    console.log('ffdfd3')
+
+                    if (options.cwd && options.cwd.length) {
+                        process.chdir(options.cwd);
+                    }
+
+                    console.log('ffdfd4')
+                    //auto-update
+                    await require(path.join(BASE_TIDIL_DIR, 'util/auto-update'))({ BASE_TIDIL_DIR, TIDIL_CMD_NAME })
+
+                    let utilCommand;
+                    try {
+
+                        utilCommand = require(path.join(BASE_TIDIL_DIR, `util/clone`))
+
+                    } catch (err) {
+                        throw new Error("Failed to find utility method");
+                    }
+
+
+                    await utilCommand({ BASE_TIDIL_DIR,repo,destination });
+                    process.exit(0);
+
+                } catch (err) {
+                    //console.error("Command Error\n", err);
+                    //console.error("Error",err.message);//pretty print
+                    process.exit(1);
+                }
+
+            });
+
         program.parse(process.argv);
 
 
