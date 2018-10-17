@@ -74,7 +74,8 @@ module.exports = async ({BASE_TIDIL_DIR, TIDIL_CMD_NAME}) => {
 
                     // }
 
-                    throw new Error('We cannot auto-update tidil at this time. \nPlease manually run:\n\n npm install -g tidil\n or\n yarn global add tidil')
+                    if (_needsToUpdate)
+                        throw new Error('We cannot auto-update tidil at this time. \nPlease manually run:\n\n npm install -g tidil\n or\n yarn global add tidil')
 
                 } catch (e) {
                     reject(e);
