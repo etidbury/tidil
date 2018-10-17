@@ -13,6 +13,10 @@ module.exports = async ({targetDirectory}) => {
     commands[`Pluck console.log and console.trace lines in all files within directory: ${targetDirectory}`] = {
         command: `find ${targetDirectory} -type f -name '*.js' -not -path "*flow-typed*" -not -path "*node_modules*" -exec sed -i '' -E 's/console.(log|trace)\\((.*)\\)\\)?\/\/g' {} +`
     }
+    
+    commands[`Git Ignore white-spaces etc.`] = {
+        command: `git diff -U0 -w --no-color | git apply --cached --ignore-whitespace --unidiff-zero ; git checkout . ; git reset --mixed`
+    }
 
-    await require('exec-sequence').run(commands);
+    await require('exec-sequence').run(commands)
 };
