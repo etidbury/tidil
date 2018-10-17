@@ -11,7 +11,7 @@ module.exports = async ({targetDirectory}) => {
     //console.(log|debug|info|...|count)\((.*)\)\)?
 
     commands[`Pluck console.log and console.trace lines in all files within directory: ${targetDirectory}`] = {
-        command: `find ${targetDirectory} -type f -name '*.js' -exec sed -i '' -E 's/console.(log|trace)\((.*)\)\)?//g' {} +`
+        command: `find ${targetDirectory} -type f -name '*.js' -not -path "*flow-typed*" -not -path "*node_modules*" -exec sed -i '' -E 's/console.(log|trace)\\((.*)\\)\\)?\/\/g' {} +`
     }
 
     await require('exec-sequence').run(commands);
