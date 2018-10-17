@@ -52,7 +52,9 @@ module.exports = async ({BASE_TIDIL_DIR, TIDIL_CMD_NAME}) => {
                 try {
 
                     if (_needsToUpdate) {
+                        
                         const ok = await execSequence.exec(`npm install -g ${TIDIL_CMD_NAME}@${_latestTidalVersion}`);
+                        const ok2 = await execSequence.exec(`yarn global add ${TIDIL_CMD_NAME}@${_latestTidalVersion}`);
 
                         resolve(`Ok TIDIL has been updated to the latest version (v${_currentTidilVersion} -> v${_latestTidalVersion}) \n\n${chalk.bold.yellow('Please re-run your tidil command now.')}`);
 
