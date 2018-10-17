@@ -51,27 +51,30 @@ module.exports = async ({BASE_TIDIL_DIR, TIDIL_CMD_NAME}) => {
 
                 try {
 
-                    if (_needsToUpdate) {
+                    // todo: needs fixing!!
 
-                        const ok = await execSequence.exec(`npm install -g ${TIDIL_CMD_NAME}`);
-                        const ok2 = await execSequence.exec(`yarn global add ${TIDIL_CMD_NAME}`);
+                    // if (_needsToUpdate) {
 
-                        resolve(`Ok TIDIL has been updated to the latest version (v${_currentTidilVersion} -> v${_latestTidalVersion}) \n\n${chalk.bold.yellow('Please re-run your tidil command now.')}`);
+                    //     const ok = await execSequence.exec(`npm install -g ${TIDIL_CMD_NAME}`);
+                    //     const ok2 = await execSequence.exec(`yarn global add ${TIDIL_CMD_NAME}`);
 
-                        await new Promise((resolve,reject)=>{
-                            setTimeout(()=>{
-                                resolve();
-                            },2000);
-                        });
+                    //     resolve(`Ok TIDIL has been updated to the latest version (v${_currentTidilVersion} -> v${_latestTidalVersion}) \n\n${chalk.bold.yellow('Please re-run your tidil command now.')}`);
 
-                        process.exit(128);//todo: correct error code
-                    } else {
+                    //     await new Promise((resolve,reject)=>{
+                    //         setTimeout(()=>{
+                    //             resolve();
+                    //         },2000);
+                    //     });
 
-                        resolve("Using latest version of TIDIL!");
+                    //     process.exit(128);//todo: correct error code
+                    // } else {
+
+                    //     resolve("Using latest version of TIDIL!");
 
 
-                    }
+                    // }
 
+                    throw new Error('We cannot auto-update tidil at this time. \nPlease manually run:\n\n npm install -g tidil\n or\n yarn global add tidil')
 
                 } catch (e) {
                     reject(e);
