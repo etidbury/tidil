@@ -613,6 +613,50 @@ const TIDIL_CMD_NAME = "tidil";
 
             });
 
+
+        program
+            .version('' + pkg.version)
+            .command(`pluck <targetDirectory>`)
+            .option('--cwd <directory>', 'Set base directory')
+            .description('run setup commands for all envs')
+            //.option("-s, --setup_mode [mode]", "Which setup mode to use")
+            .action(async (targetDirectory, options) => {
+                try {
+                    
+                    if (!targetDirectory || !targetDirectory.length) {
+                        throw new Error(`Invalid targetDirectory specified: '${targetDirectory}'`);
+                    }
+         
+
+                    if (options.cwd && options.cwd.length) {
+                        process.chdir(options.cwd);
+                    }
+
+                    
+                    //auto-update
+                    await require(path.join(BASE_TIDIL_DIR, 'util/auto-update'))({ BASE_TIDIL_DIR, TIDIL_CMD_NAME })
+
+                    let utilCommand;
+                    try {
+
+                        utilCommand = require(path.join(BASE_TIDIL_DIR, `util/pluck/console`))
+
+                    } catch (err) {
+                        throw new Error("Failed to find utility method");
+                    }
+
+
+                    await utilCommand({ BASE_TIDIL_DIR,targetDirectory });
+                    process.exit(0);
+
+                } catch (err) {
+                    console.error("Command Error\n", err);
+                    console.error("Error",err.message);//pretty print
+                    process.exit(1);
+                }
+
+            });
+
         program.parse(process.argv);
 
 
