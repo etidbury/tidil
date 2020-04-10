@@ -214,44 +214,7 @@ const TIDIL_CMD_NAME = "tidil";
 
             });
 
-        program
-            .command(`test-all`)
-            .option('--cwd <directory>', 'Set base directory')
-            .description('run all tests')
-            //.option("-s, --setup_mode [mode]", "Which setup mode to use")
-            .action(async (options) => {
-
-
-                try {
-
-
-                    _handleCWD(options);
-
-
-
-                    let miscCommand;
-                    try {
-
-                        miscCommand = require(path.join(BASE_TIDIL_DIR, `util/test-all`));
-
-                    } catch (err) {
-                        throw err;
-                        //throw new Error("Failed to find utility method");
-                    }
-
-
-                    await miscCommand({ port: options.port });
-                    process.exit(0);
-
-                } catch (err) {
-                    //console.error("Command Error\n", err);
-                    //console.error("Error",err.message);//pretty print
-                    process.exit(1);
-                }
-
-            });
-
-
+    
         program
             .command(`env`)
             .option('--cwd <directory>', 'Set base directory')
