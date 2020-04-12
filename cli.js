@@ -9,11 +9,7 @@ const saveClipboard=require('./lib/saveClipboard')
 const BASE_TIDIL_DIR = __dirname;
 const TIDIL_CMD_NAME = "tidil";
 
-function clearConsoleAndScrollbackBuffer() {
-    process.stdout.write("\u001b[3J\u001b[2J\u001b[1J");console.clear();
-}
-
-const {uploadFile,registerClipboard} = require('./lib/api');
+const {uploadFile} = require('./lib/api');
 
 const isCI=typeof process.env.CI!=="undefined";
 
