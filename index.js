@@ -2,6 +2,10 @@
 const program = require('commander');
 const pkg = require('./package');
 const path = require('path');
+const viewClipboard=require('./lib/viewClipboard')
+const saveClipboard=require('./lib/saveClipboard')
+
+
 const BASE_TIDIL_DIR = __dirname;
 const TIDIL_CMD_NAME = "tidil";
 
@@ -9,7 +13,7 @@ function clearConsoleAndScrollbackBuffer() {
     process.stdout.write("\u001b[3J\u001b[2J\u001b[1J");console.clear();
 }
 
-const {uploadFile} = require('./lib/bucket');
+const {uploadFile,registerClipboard} = require('./lib/api');
 
 const isCI=typeof process.env.CI!=="undefined";
 
@@ -700,6 +704,52 @@ const isCI=typeof process.env.CI!=="undefined";
                 }
 
             });
+
+
+        program
+            .version('' + pkg.version)
+            .command(`clip [text]`)
+            .description('Copy your clipboard to the cloud')
+            .option("-c <channel>", "Set channel")
+            .option("-t <tags>", "Add tags")
+            .action(async (text, options) => {
+                try {
+                    
+
+                    if (text&&text==="view"){
+
+                        await viewClipboard({
+                            channelToken:options.channel&&options.channel.length?options.channel:"default",
+                            //tags:options.tags&&options.tags.length?options.tags:""
+                        })
+
+                        //process.exit(0);
+                        return
+                    }
+
+                   await saveClipboard({
+                       appendText:text||"",
+                       channelToken:options.channel&&options.channel.length?options.channel:"default",
+                       tags:options.tags&&options.tags.length?options.tags:""
+                   })
+                   //todo: implement
+
+
+
+                    process.exit(0);
+
+                } catch (err) {
+                    console.error("Command Error\n", err);
+                    console.error("Error",err.message);//pretty print
+
+                    if (err&&err.response&&err.response.data){
+                        console.error("Error response",err.response.data)
+                    }
+                    process.exit(1);
+                }
+
+            });
+
 
         program.parse(process.argv);
 
