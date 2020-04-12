@@ -30,7 +30,7 @@ module.exports = async ({ portEnv, port,wait }) => {
                     return resolve(`Checking server at port ${_port}`);
 
                 } else {
-                    portEnv = portEnv ? portEnv : "DEV_CLIENT_PORT";
+                    portEnv = portEnv ? portEnv : "PORT";
 
                     if (!process.env[portEnv] || !process.env[portEnv].length)
                         throw new Error(`Failed to find environment variable '${portEnv}' for port! Please run 'tidil env'`);

@@ -4,9 +4,9 @@ module.exports = async () => {
     require('dotenv').config({path: path.resolve(process.cwd(),'.env')});
 
     await require('exec-sequence').run({
-        "Remove package lock files": {
+        "Remove package lock files (package-lock.json,yarn.lock)": {
             //command: "exit 0",
-            command: "rm -rf package-lock.json ; rm -rf yarn.lock ; rm -rf server/package-lock.json ; rm -rf server/yarn.lock"
+            command: "rm -rf package-lock.json ; rm -rf yarn.lock"
         }
     });
 };
