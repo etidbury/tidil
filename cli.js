@@ -723,7 +723,7 @@ const isCI=typeof process.env.CI!=="undefined";
                         return
                     }
 
-                   await saveClipboard({
+                   const {resultURL} = await saveClipboard({
                        appendText:text||"",
                        channelToken:options.channel&&options.channel.length?options.channel:"default",
                        tags:options.tags&&options.tags.length?options.tags:""
@@ -731,6 +731,9 @@ const isCI=typeof process.env.CI!=="undefined";
                    //todo: implement
 
 
+                   if (resultURL){
+                       console.log(resultURL)
+                   }
 
                     process.exit(0);
 
