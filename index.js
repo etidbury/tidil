@@ -5,6 +5,15 @@ const path = require('path');
 const BASE_TIDIL_DIR = __dirname;
 const TIDIL_CMD_NAME = "tidil";
 
+function clearConsoleAndScrollbackBuffer() {
+    process.stdout.write("\u001b[3J\u001b[2J\u001b[1J");console.clear();
+}
+
+const {uploadFile} = require('./lib/bucket');
+
+const isCI=typeof process.env.CI!=="undefined";
+
+
 (async () => {
     try {
 
@@ -650,6 +659,38 @@ const TIDIL_CMD_NAME = "tidil";
 
 
                     await utilCommand({ BASE_TIDIL_DIR });
+                    process.exit(0);
+
+                } catch (err) {
+                    console.error("Command Error\n", err);
+                    console.error("Error",err.message);//pretty print
+                    process.exit(1);
+                }
+
+            });
+
+
+            program
+            .version('' + pkg.version)
+            .command(`upload <filePath>`)
+            .option('--cwd <directory>', 'Set base directory')
+            .description('Git ignore all white-space etc.')
+            //.option("-s, --setup_mode [mode]", "Which setup mode to use")
+            .action(async (filePath, options) => {
+                try {
+                    
+
+                    if (options.cwd && options.cwd.length) {
+                        process.chdir(options.cwd);
+                    }
+
+
+                    const { url } = await uploadFile({filePath,suppressOutput:isCI})
+
+                    //clearConsoleAndScrollbackBuffer()
+                    console.log(url)
+
+
                     process.exit(0);
 
                 } catch (err) {
