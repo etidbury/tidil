@@ -1,10 +1,11 @@
 {
   "name": "tidil",
-  "version": "1.0.7",
+  "version": "1.0.8",
   "description": "",
   "main": "index.js",
   "scripts": {
     "start": "node index.js",
+    "start:noelectron": "node cli.js",
     "start:debug": "DEBUG=true node index.js",
     "_start": "/node_modules/.bin/electron cli.js",
     "scratch": "electron scratch.js",
@@ -13,7 +14,8 @@
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "bin": {
-    "tidil": "index.js"
+    "tidil": "index.js",
+    "tidlite":"cli.js"
   },
   "author": "Edd Tidbury",
   "license": "MIT",
