@@ -710,7 +710,7 @@ const isCI=typeof process.env.CI!=="undefined";
             .option("-t <tags>", "Add tags")
             .action(async (text, options) => {
                 try {
-                    
+                    text=text||""
 
                     if (text&&text==="view"){
 
@@ -723,16 +723,15 @@ const isCI=typeof process.env.CI!=="undefined";
                         return
                     }
 
-                   const {resultURL} = await saveClipboard({
-                       appendText:text||"",
+                   const {plainText} = await saveClipboard({
+                       appendText:text,
                        channelToken:options.channel&&options.channel.length?options.channel:"default",
                        tags:options.tags&&options.tags.length?options.tags:""
                    })
                    //todo: implement
 
-
-                   if (resultURL){
-                       console.log(resultURL)
+                   if (plainText&&plainText.length){
+                       console.log(plainText)
                    }
 
                     process.exit(0);

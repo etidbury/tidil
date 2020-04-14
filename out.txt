@@ -1,0 +1,4 @@
+yarn run v1.22.0
+$ node index.js clip
+https://tidil.now.sh/bucket/IakfaMbatz/Users/edwardtidbury/Documents/tidil/package.json
+Done in 1.76s.

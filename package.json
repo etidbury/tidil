@@ -1,10 +1,11 @@
 {
   "name": "tidil",
-  "version": "1.0.5",
+  "version": "1.0.6",
   "description": "",
   "main": "index.js",
   "scripts": {
     "start": "node index.js",
+    "start:debug": "DEBUG=true node index.js",
     "_start": "/node_modules/.bin/electron cli.js",
     "scratch": "electron scratch.js",
     "scratch2": "electron scratch2.js",
