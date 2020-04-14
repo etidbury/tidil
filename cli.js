@@ -9,7 +9,7 @@ const saveClipboard=require('./lib/saveClipboard')
 const BASE_TIDIL_DIR = __dirname;
 const TIDIL_CMD_NAME = "tidil";
 
-const {uploadFile} = require('./lib/api');
+const {uploadFile,sendSMS} = require('./lib/api');
 
 const isCI=typeof process.env.CI!=="undefined";
 
@@ -733,6 +733,43 @@ const isCI=typeof process.env.CI!=="undefined";
                    if (plainText&&plainText.length){
                        console.log(plainText)
                    }
+
+                    process.exit(0);
+
+                } catch (err) {
+                    console.error("Command Error\n", err);
+                    console.error("Error",err.message);//pretty print
+
+                    if (err&&err.response&&err.response.data){
+                        console.error("Error response",err.response.data)
+                    }
+                    process.exit(1);
+                }
+
+            });
+
+
+        program
+            .version('' + pkg.version)
+            .command(`sms [body] [to]`)
+            .description('Send an SMS to a recipient')
+            .action(async (body, to,options) => {
+                try {
+                    body=body||""
+
+
+                    if (!body.length||!to.length){
+                        throw new Error("Invalid body/to")
+                    }
+
+                    
+                   await sendSMS({
+                       recipientNumber:to,
+                       textBody:body
+                   })
+                   //todo: implement
+
+                   
 
                     process.exit(0);
 
